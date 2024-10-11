@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     //Attribute for move speed for enemies
     [Header("Attributes")]
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 0.5f;
 
     private Transform target;
     //start of path by path index
@@ -32,7 +32,6 @@ public class EnemyMovement : MonoBehaviour
             //verify that length is equal of path distance
             if (pathId == Manager.main.path.Length)
             {
-                Spawner.onEnemyDestroy.Invoke();
                 //if condition was reached - target'll be destroyed
                 Destroy(gameObject);
                 return;
