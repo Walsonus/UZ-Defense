@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigbody: {fileID: 4346659861188876033}
-  moveSpeed: 5
+  moveSpeed: 4
