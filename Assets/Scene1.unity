@@ -132,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 74060675}
   - component: {fileID: 74060674}
-  - component: {fileID: 74060676}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -179,6 +178,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!114 &74060676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +197,8 @@ MonoBehaviour:
   enemiesPerSecond: 2
   timeBetweenWaves: 15
   difficultyScalingFactor: 0.75
+=======
+>>>>>>> cab0376ac45cfc26ea229536d78b28389d490bd4
 --- !u!1 &118312298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,6 +1614,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 647418926343381035, guid: 44e5544d7a3dcb5428b6ffc9c9ea9e6a, type: 3}
   m_PrefabInstance: {fileID: 8233902671704188918}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+=======
+--- !u!1001 &7948531364047643687
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.317
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 802314036105708610, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2481847198060212866, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_Name
+      value: Goblin Scout
+      objectReference: {fileID: 0}
+    - target: {fileID: 2481847198060212866, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06eba4beffee5114dae5295dee6dbcd3, type: 3}
+>>>>>>> cab0376ac45cfc26ea229536d78b28389d490bd4
 --- !u!1001 &8233902671704188918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1679,4 +1745,8 @@ SceneRoots:
   - {fileID: 515420495}
   - {fileID: 1618815107}
   - {fileID: 1509589474}
+<<<<<<< HEAD
+=======
+  - {fileID: 7948531364047643687}
+>>>>>>> cab0376ac45cfc26ea229536d78b28389d490bd4
   - {fileID: 118312300}
