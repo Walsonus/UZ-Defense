@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
 
     //Attribute for move speed for enemies
     [Header("Attributes")]
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed;
 
     private Transform target;
     //start of path by path index

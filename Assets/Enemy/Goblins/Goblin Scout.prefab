@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4346659861188876033}
   - component: {fileID: 7251279005511488532}
   - component: {fileID: 378262553694200048}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin Scout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigbody: {fileID: 4346659861188876033}
-  moveSpeed: 0.5
+  moveSpeed: 5
