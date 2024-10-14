@@ -33,6 +33,7 @@ public class EnemyMovement : MonoBehaviour
             if (pathId == Manager.main.path.Length)
             {
                 //if condition was reached - target'll be destroyed
+                Spawner.onEnemyDestroy.Invoke();
                 Destroy(gameObject);
                 return;
             }

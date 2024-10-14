@@ -195,7 +195,7 @@ MonoBehaviour:
   - {fileID: 3649689972246316489, guid: 9fcaed07b3bfc1947b2d77c59557193c, type: 3}
   baseNumber: 10
   enemiesPerSecond: 1
-  timeBetweenWaves: 15
+  timeBetweenWaves: 5
   difficultyScalingFactor: 0.75
 --- !u!1 &118312298
 GameObject:
@@ -798,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 672527607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.38, y: -6.61, z: 0}
+  m_LocalPosition: {x: 21.28, y: -6.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
