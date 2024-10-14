@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -31,13 +32,13 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        StartWave();
+        StartCoroutine(StartWave());
     }
     private void Update()
     {
         if (!isSpawning) return;
         timeSinceLastSpawn += Time.deltaTime;
-        
+
         //time elapsed since the apperance of the enemy (e.g [1 / 0.1 == 10 sec)
         if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
         {
@@ -45,6 +46,11 @@ public class Spawner : MonoBehaviour
             enemiesLeftToSpawn--;
             enemiesAlive++;
             timeSinceLastSpawn = 0f;
+        }
+
+        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
+        {
+            EndWave();
         }
     }
 
@@ -55,10 +61,22 @@ public class Spawner : MonoBehaviour
         //Add health points for CASTLE health somwhere
         /*healthPoints--;*/
     }
-    private void StartWave()
+    private IEnumerator StartWave()
     {
+        yield return new WaitForSeconds(timeBetweenWaves);
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
+    }
+
+    private void EndWave()
+    {
+        
+        isSpawning = false;
+        timeSinceLastSpawn = 0f;
+        currentWave++;
+        StartCoroutine(StartWave());
+       
+
     }
 
     private void SpawnEnemy()
