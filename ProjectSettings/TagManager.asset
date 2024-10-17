@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Turrets
     uniqueID: 376280675
+    locked: 1
+  - name: Bullets
+    uniqueID: 4161107437
     locked: 0

@@ -12,7 +12,7 @@ public class Turret : MonoBehaviour
     //project layer with enemies
     [SerializeField] private LayerMask enemyMask;
     //reference to a bullet object
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject bulletRef;
     //spawn point for bullets on the turret
     [SerializeField] private Transform bulletPoint;
     
@@ -103,7 +103,12 @@ public class Turret : MonoBehaviour
     }
 
     private void Shoot(){
-        Debug.Log("Shoot");
+        //getting the bullet object
+                GameObject bulletInstance = Instantiate(bulletRef, bulletPoint.position, Quaternion.identity);
+                //getting the bullet script inside bullet object
+                Bullet bulletScr = bulletInstance.GetComponent<Bullet>();
+                //setting the target in the .setTarget() function inside Bullet object
+                bulletScr.SetTarget(target);
     }
 
 }
