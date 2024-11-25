@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3284450592828096686}
   - component: {fileID: 6373349526316705656}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: Arrow Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,4 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 5
+  bulletDmg: 1
   rig: {fileID: 3284450592828096686}
