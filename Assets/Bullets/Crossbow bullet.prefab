@@ -162,5 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 6
-  bulletDmg: 2
+  bulletDmg: 4
+  slowsEnemy: 0
   rig: {fileID: 3284450592828096686}

@@ -16,11 +16,14 @@ public class Bullet : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float bulletSpeed = 2f;
     [SerializeField] private int bulletDmg = 1;
+    //slow effect
+    [SerializeField] private bool slowsEnemy = false;
 
 
     [Header("References")]
     //RigidBody used to add velocity to the bullet
     [SerializeField] private Rigidbody2D rig;
+    
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -36,6 +39,11 @@ public class Bullet : MonoBehaviour
         //Handle enemy collision
         //Debug.Log("Collinded with "+col.gameObject.name);
         //reciveing the .DMG() function from the Health script
+
+        if(slowsEnemy){
+            col.gameObject.GetComponent<EnemyMovement>().UpdateSpeed(col.gameObject.GetComponent<EnemyMovement>().GetSpeed()/2);
+        }
+
         col.gameObject.GetComponent<Health>().DMG(bulletDmg);
         Destroy(gameObject);
     //}
