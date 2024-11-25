@@ -16,8 +16,12 @@ public class EnemyMovement : MonoBehaviour
     //start of path by path index
     private int pathId = 0;
 
+    //speed at which the enemy moves by default
+    private float baseSpeed;
+
     private void Start()
     {
+        baseSpeed = moveSpeed;
         //start point for moving enemy
         target = Manager.main.path[pathId];
     }
@@ -50,4 +54,17 @@ public class EnemyMovement : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
         rigbody.velocity = direction * moveSpeed;
     }
+
+    public float GetSpeed(){
+        return baseSpeed;
+    }
+
+    public void UpdateSpeed(float newSpeed){
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed(){
+        moveSpeed = baseSpeed;
+    }
+
 }

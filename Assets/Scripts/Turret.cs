@@ -23,6 +23,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 100f;
     //attack speed of the turret in shoots per second
     [SerializeField] private float fireRate = 2f;
+    
 
     //test function showing the range of the turret
         private void OnDrawGizmosSelected(){
