@@ -31,6 +31,9 @@ public class Bullet : MonoBehaviour
         if(!target) return;
         Vector2 direction = (target.position - transform.position).normalized;
         rig.velocity = direction * bulletSpeed;
+        // Rotate the bullet to always face the target
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90; // Convert the direction to an angle
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Apply the rotation to the bullet
     }
 
     void OnCollisionEnter2D(Collision2D col){
