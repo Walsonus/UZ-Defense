@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
+using System;
 
 public class Turret : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject bulletRef;
     //spawn point for bullets on the turret
     [SerializeField] private Transform bulletPoint;
+    //reference to the upgrade UI
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
     
     [Header("Attribute")]
     //targetting range of the turret
@@ -23,6 +28,10 @@ public class Turret : MonoBehaviour
     [SerializeField] private float rotationSpeed = 100f;
     //attack speed of the turret in shoots per second
     [SerializeField] private float fireRate = 2f;
+    [SerializeField] private int baseCost = 100;
+
+    private float baseRange;
+    private float baseFireRate;
     
 
     //test function showing the range of the turret
@@ -35,17 +44,23 @@ public class Turret : MonoBehaviour
     private Transform target;
 
     private float timeToNextBullet;
+    private int turretLevel = 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        baseFireRate = fireRate;
+        baseRange = range;
+
+        upgradeButton.onClick.AddListener(UpgradeTurret);
         
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if(target == null){
             FindTarget();
             return;
@@ -111,5 +126,40 @@ public class Turret : MonoBehaviour
                 //setting the target in the .setTarget() function inside Bullet object
                 bulletScr.SetTarget(target);
     }
+
+    public void OpenUpgradeUI(){
+        upgradeUI.SetActive(true);
+    }
+
+    public void closeUpgradeUI(){
+        upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+
+    public void UpgradeTurret(){
+        if(CostCalculator() <= BuildingManager.main.coins){
+            BuildingManager.main.SpendCoins(CostCalculator());
+            turretLevel += 1;
+
+            fireRate = FireRateCalculator();
+            range = RangeCalculator();
+
+            closeUpgradeUI();
+        }
+    }
+
+    private float FireRateCalculator(){
+        return baseFireRate * Mathf.Pow(turretLevel, 0.5f);
+    }
+
+    private int CostCalculator(){
+        return (int)Math.Round((double)(baseCost*2 * (turretLevel/2)));
+    }
+
+    private float RangeCalculator(){
+        return baseRange * Mathf.Pow(turretLevel, 0.4f);
+    }
+
+
 
 }

@@ -9,6 +9,7 @@ public class Plot : MonoBehaviour
    [SerializeField] private SpriteRenderer sr;
    [SerializeField] private Color hoverColor;
     private GameObject tower;
+    public  Turret turret;
     private Color startColor;
 
     private void Start(){
@@ -22,8 +23,13 @@ public class Plot : MonoBehaviour
         sr.color = startColor;
     }
 
-    private void OnMouseDown(){
-        if(tower != null) return;
+    private void OnMouseDown(){        
+        if(UIManager.main.IsHovering()) return;
+
+        if(tower != null) {
+            turret.OpenUpgradeUI();
+            return;
+            }
 
         Tower towerToBuild = BuildingManager.main.GetSelectedTower();
         if (towerToBuild.cost > BuildingManager.main.coins){
@@ -34,6 +40,7 @@ public class Plot : MonoBehaviour
         BuildingManager.main.SpendCoins(towerToBuild.cost);
 
     tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity); // Twórz instancję wieży
+    turret = tower.GetComponent<Turret>();
 }
 
 }
