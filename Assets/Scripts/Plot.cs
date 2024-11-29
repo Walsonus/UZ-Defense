@@ -7,7 +7,7 @@ public class Plot : MonoBehaviour
 {
    [Header("References")]
    [SerializeField] private SpriteRenderer sr;
-   [SerializeField] private Color hoverColor;
+   [SerializeField] public Color hoverColor;
     private GameObject tower;
     public  Turret turret;
     private Color startColor;
@@ -41,6 +41,7 @@ public class Plot : MonoBehaviour
 
     tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity); // Twórz instancję wieży
     turret = tower.GetComponent<Turret>();
+    sr.sprite = null;
 }
 
 }
