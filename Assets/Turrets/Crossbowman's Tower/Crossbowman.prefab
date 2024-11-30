@@ -50,7 +50,7 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletRef: {fileID: 5913844571432265652, guid: 24ad0fccf2d95c24592973e79323a318, type: 3}
+  bulletRef: {fileID: 5913844571432265652, guid: 01b11677ca0afc448bb5d6851c24ac75, type: 3}
   bulletPoint: {fileID: 8615642615219024520}
   upgradeUI: {fileID: 5660855745469757918}
   upgradeButton: {fileID: 3992411356787176938}

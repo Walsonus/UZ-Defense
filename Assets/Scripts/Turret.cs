@@ -128,7 +128,7 @@ public class Turret : MonoBehaviour
     }
 
     public void OpenUpgradeUI(){
-        upgradeUI.SetActive(true);
+        upgradeUI.SetActive(true);      
     }
 
     public void closeUpgradeUI(){
@@ -159,7 +159,4 @@ public class Turret : MonoBehaviour
     private float RangeCalculator(){
         return baseRange * Mathf.Pow(turretLevel, 0.4f);
     }
-
-
-
 }
