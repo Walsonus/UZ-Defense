@@ -4,50 +4,52 @@ using UnityEngine.EventSystems;  // Potrzebne do obsługi interakcji z myszką
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
-public class HoverText : MonoBehaviour,IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("References")]
     [SerializeField] private TextMeshProUGUI textMeshPro; // Referencja do TMP
-    [SerializeField] private Color hoverColor = Color.yellow; // Kolor podświetlenia
+    [SerializeField] private Color hoverColor; // Kolor podświetlenia
     private Color originalColor; // Oryginalny kolor tekstu
-    private bool isSelected = false;
     private static HoverText currentlySelected;
+    private string originalText;
+    [SerializeField] private string hoverText;
 
     private void Start()
     {
-        // Pobierz oryginalny kolor tekstu
-        originalColor = textMeshPro.color;
+    if (textMeshPro != null)
+        {
+            originalText = string.IsNullOrEmpty(originalText) ? textMeshPro.text : originalText; // Zachowaj bieżący tekst jako domyślny
+            originalColor = textMeshPro.color; // Zachowaj bieżący kolor jako domyślny
+        }
     }
-
     // Obsługuje najechanie myszką na tekst
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Zmieniamy kolor tekstu na podświetlony
-        if(currentlySelected != this){
-        textMeshPro.color = hoverColor;
+        if (textMeshPro != null)
+        {
+            // Jeśli hoverText jest ustawiony, zmień tekst
+            if (!string.IsNullOrEmpty(hoverText))
+            {
+                textMeshPro.text = hoverText;
+            }
+
+            // Zmień kolor na podświetlony
+            textMeshPro.color = hoverColor;
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        // Zmieniamy kolor tekstu na podświetlony
-        if(currentlySelected != null && currentlySelected != this){
-            currentlySelected.OnDeselect();
-        }
-        textMeshPro.color = hoverColor;
-        currentlySelected = this;
-    }
-
-    // Obsługuje opuszczenie obszaru tekstu
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Przywracamy oryginalny kolor
-        if(currentlySelected != this){
-        textMeshPro.color = originalColor;
-        }
-    }
+        if (textMeshPro != null)
+        {
+            // Jeśli originalText został ustawiony, przywróć go
+            if (!string.IsNullOrEmpty(originalText))
+            {
+                textMeshPro.text = originalText;
+            }
 
-    public void OnDeselect(){
-        textMeshPro.color = originalColor;
+            // Przywróć oryginalny kolor
+            textMeshPro.color = originalColor;
+        }
     }
 }
