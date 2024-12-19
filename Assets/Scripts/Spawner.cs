@@ -1,52 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private AudioClip newMissionCompleteMusic;  // Nowy utwór na zakończenie misji
+    [SerializeField] AudioSource audioSource;  // Komponent AudioSource
+
     [Header("Attributes")]
-    //number of enemies
     [SerializeField] private int baseNumber = 10;
     [SerializeField] private float enemiesPerSecond = 1f;
     [SerializeField] private float timeBetweenWaves = 15f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
-    //maximum number of enemies per second
     [SerializeField] private float enemiesPerSecondCap = 10f;
 
-    
-
+    [Header("Wave Control")]
+    [SerializeField] private int totalWaves = 5; // liczba maksymalnych fal
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
+    public Animator animator;
 
     private int currentWave = 1;
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
-    //enemies per second of the wave
     private float waveEnemiesPerSecond;
 
     private void Awake()
     {
         onEnemyDestroy.AddListener(EnemyDestroyed);
+        audioSource.Play();
     }
 
     private void Start()
     {
         StartCoroutine(StartWave());
     }
+
     private void Update()
     {
         if (!isSpawning) return;
+
         timeSinceLastSpawn += Time.deltaTime;
 
-        //time elapsed since the apperance of the enemy (e.g [1 / 0.1 == 10 sec)
         if (timeSinceLastSpawn >= (1f / waveEnemiesPerSecond) && enemiesLeftToSpawn > 0)
         {
             SpawnEnemy();
@@ -64,10 +65,8 @@ public class Spawner : MonoBehaviour
     private void EnemyDestroyed()
     {
         enemiesAlive--;
-
-        //Add health points for CASTLE health somwhere
-        /*healthPoints--;*/
     }
+
     private IEnumerator StartWave()
     {
         yield return new WaitForSeconds(timeBetweenWaves);
@@ -78,21 +77,55 @@ public class Spawner : MonoBehaviour
 
     private void EndWave()
     {
-        
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        currentWave++;
-        StartCoroutine(StartWave());
-       
 
+        if (currentWave >= totalWaves)
+        {
+            MissionComplete();
+            Invoke("LoadMainMenu",10f);
+        }
+        else
+        {
+            currentWave++;
+            StartCoroutine(StartWave());
+        }
+    }
+
+    void LoadMainMenu()
+    {
+        // Ładowanie sceny "MainMenu"
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void MissionComplete()
+    {
+        if (animator == null)
+        {
+            Debug.LogError("Animator is not assigned!");
+            return;
+        }
+
+        if (audioSource != null && newMissionCompleteMusic != null)
+    {
+        // Zatrzymanie obecnej muzyki przed zmianą
+        audioSource.Stop();  
+
+        // Ustawienie nowego utworu
+        audioSource.clip = newMissionCompleteMusic;
+
+        // Odpalamy nową muzykę
+        audioSource.Play();  
+    }
+        Debug.Log("Mission Complete!");
+        animator.SetTrigger("isMissionCompleted");
     }
 
     private void SpawnEnemy()
     {
-        //selecting enemy type to spawn at random
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
         GameObject prefabToSpawn = enemyPrefabs[randomIndex];
-        Instantiate(prefabToSpawn, Manager.main.startPoint.position,Quaternion.identity);
+        Instantiate(prefabToSpawn, Manager.main.startPoint.position, Quaternion.identity);
         Debug.Log("Enemy Spawned");
     }
 
@@ -101,9 +134,8 @@ public class Spawner : MonoBehaviour
         return Mathf.RoundToInt(baseNumber * Mathf.Pow(currentWave, difficultyScalingFactor));
     }
 
-    //function that returns the enemies per second of the current wave
     private float EnemiesPerSecond()
     {
-        return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor),0 , enemiesPerSecondCap);
+        return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0, enemiesPerSecondCap);
     }
 }

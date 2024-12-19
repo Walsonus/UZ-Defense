@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
     [SerializeField] TextMeshProUGUI coinsUI;
     [SerializeField] Animator anim;
 
-    private bool isMenuOpen = true;
+    private bool isMenuOpen = false;
 
     public void ToggleMenu(){
         isMenuOpen = !isMenuOpen;
