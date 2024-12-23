@@ -19,6 +19,8 @@ public class Spawner : MonoBehaviour
 
     [Header("Wave Control")]
     [SerializeField] private int totalWaves = 5; // liczba maksymalnych fal
+    [SerializeField] private CanvasGroup uiCanvasGroup;
+    [SerializeField] private GameObject[] gameObjectsGroup;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
@@ -119,6 +121,8 @@ public class Spawner : MonoBehaviour
     }
         Debug.Log("Mission Complete!");
         animator.SetTrigger("isMissionCompleted");
+        BlockUserInterface();
+        DisableInteraction();
     }
 
     private void SpawnEnemy()
@@ -138,4 +142,48 @@ public class Spawner : MonoBehaviour
     {
         return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0, enemiesPerSecondCap);
     }
+    private void BlockUserInterface()
+{
+    if (uiCanvasGroup != null)
+    {
+        uiCanvasGroup.interactable = false;
+        uiCanvasGroup.blocksRaycasts = false;
+        Debug.Log("UI interaction blocked.");
+    }
+    else
+    {
+        Debug.LogError("CanvasGroup is not assigned in the inspector!");
+    }
+}
+    private void DisableInteraction()
+{
+    if (gameObjectsGroup != null)
+    {
+        // Iteruj przez wszystkie obiekty w grupie
+        foreach (GameObject obj in gameObjectsGroup)
+        {
+            if (obj != null)
+            {
+                // Wyłączamy tylko Collider2D, aby obiekt nie reagował na kliknięcia, ale pozostaje widoczny
+                Collider2D collider = obj.GetComponent<Collider2D>();
+                if (collider != null)
+                {
+                    collider.enabled = false; // Wyłączenie Collider2D
+                    Debug.Log("Collider disabled for object: " + obj.name);
+                }
+                else
+                {
+                    Debug.LogWarning("No Collider2D found on object: " + obj.name);
+                }
+            }
+        }
+    }
+    else
+    {
+        Debug.LogError("gameObjectsGroup is not assigned!");
+    }
+}
+
+
+
 }
