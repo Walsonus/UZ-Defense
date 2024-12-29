@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
-    public Animator animator;
+    [SerializeField] public Animator[] animators;
 
     private int currentWave = 1;
     private float timeSinceLastSpawn;
@@ -85,7 +85,7 @@ public class Spawner : MonoBehaviour
         if (currentWave >= totalWaves)
         {
             MissionComplete();
-            Invoke("LoadMainMenu",10f);
+            StartCoroutine(WaitForKeyPress());
         }
         else
         {
@@ -102,7 +102,7 @@ public class Spawner : MonoBehaviour
 
     private void MissionComplete()
     {
-        if (animator == null)
+        if (animators == null)
         {
             Debug.LogError("Animator is not assigned!");
             return;
@@ -120,7 +120,9 @@ public class Spawner : MonoBehaviour
         audioSource.Play();  
     }
         Debug.Log("Mission Complete!");
-        animator.SetTrigger("isMissionCompleted");
+        foreach (Animator animator in animators){
+            animator.SetTrigger("isMissionCompleted");
+        }
         BlockUserInterface();
         DisableInteraction();
     }
@@ -181,6 +183,20 @@ public class Spawner : MonoBehaviour
     else
     {
         Debug.LogError("gameObjectsGroup is not assigned!");
+    }
+}
+
+IEnumerator WaitForKeyPress()
+{
+    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space));
+
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        LoadMainMenu();
+    }
+    else if (Input.GetKeyDown(KeyCode.Space))
+    {
+        LoadMainMenu();
     }
 }
 
