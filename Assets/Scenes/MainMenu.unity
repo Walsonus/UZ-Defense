@@ -820,6 +820,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 352079082}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< HEAD
       m_Calls:
       - m_Target: {fileID: 533366404}
         m_TargetAssemblyTypeName: ToggleTutorial, Assembly-CSharp
@@ -833,6 +834,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> main
 --- !u!114 &352079082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,6 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonaudioSource: {fileID: 1160813131}
   choiceaudioSource: {fileID: 48675777}
+<<<<<<< HEAD
 --- !u!1 &527637960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,6 +1928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 533366400}
+=======
+>>>>>>> main
 --- !u!1 &538646443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,7 +4250,10 @@ RectTransform:
   - {fileID: 538646444}
   - {fileID: 1547146921}
   - {fileID: 295038983}
+<<<<<<< HEAD
   - {fileID: 533366401}
+=======
+>>>>>>> main
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

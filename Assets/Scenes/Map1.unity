@@ -200,7 +200,11 @@ MonoBehaviour:
   - {fileID: 3649689972246316489, guid: 0bdb31e520e11b84589d61b0e1db50c9, type: 3}
   newMissionCompleteMusic: {fileID: 8300000, guid: 6a866cc4e82f58c4985f23cdfc3058cc, type: 3}
   audioSource: {fileID: 1414745692}
+<<<<<<< HEAD
   baseNumber: 1
+=======
+  baseNumber: 2
+>>>>>>> main
   enemiesPerSecond: 0.3
   timeBetweenWaves: 1
   difficultyScalingFactor: 1
@@ -216,10 +220,14 @@ MonoBehaviour:
   - {fileID: 670500027}
   - {fileID: 1995390908}
   - {fileID: 769738091}
+<<<<<<< HEAD
   animators:
   - {fileID: 238939148}
   - {fileID: 1427369974}
   - {fileID: 2078997687}
+=======
+  animator: {fileID: 238939148}
+>>>>>>> main
 --- !u!114 &74060677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2354,7 +2362,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'MISSION COMPLETED
 
+<<<<<<< HEAD
 '
+=======
+    wait for 10 sec'
+>>>>>>> main
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: f2dcf029949142e28b974630369c8b4e, type: 2}
@@ -9576,6 +9588,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1427369972
 GameObject:
   m_ObjectHideFlags: 0
@@ -9732,6 +9745,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427369972}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> main
 --- !u!1 &1461007040
 GameObject:
   m_ObjectHideFlags: 0
@@ -10025,8 +10040,11 @@ RectTransform:
   m_Children:
   - {fileID: 185773102}
   - {fileID: 238939145}
+<<<<<<< HEAD
   - {fileID: 1427369973}
   - {fileID: 2078997686}
+=======
+>>>>>>> main
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
