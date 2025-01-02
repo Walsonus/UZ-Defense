@@ -12,14 +12,15 @@ public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Color originalColor; // Oryginalny kolor tekstu
     private static HoverText currentlySelected;
     private string originalText;
-    [SerializeField] private string hoverText;
+    private string hoverText;
 
     private void Start()
     {
     if (textMeshPro != null)
         {
-            originalText = string.IsNullOrEmpty(originalText) ? textMeshPro.text : originalText; // Zachowaj bieżący tekst jako domyślny
+            //originalText = string.IsNullOrEmpty(originalText) ? textMeshPro.text : originalText; // Zachowaj bieżący tekst jako domyślny
             originalColor = textMeshPro.color; // Zachowaj bieżący kolor jako domyślny
+            originalText = hoverText;
         }
     }
     // Obsługuje najechanie myszką na tekst
@@ -51,5 +52,10 @@ public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             // Przywróć oryginalny kolor
             textMeshPro.color = originalColor;
         }
+    }
+
+    public void SetHoverText(string hoverText)
+    {
+        this.hoverText = hoverText;
     }
 }
