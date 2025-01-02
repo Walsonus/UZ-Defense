@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialTable_pl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pl
+  m_SharedData: {fileID: 11400000, guid: d3bf0919cb24a604bab081c1cdc2fe21, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 71361429504
+    m_Localized: "To jest miejsce budowy umieszczone na mapie. Kiedy nakierujesz
+      na niego myszk\u0105, miejsce budowy zostanie pod\u015Bwietlone."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 335162179584
+    m_Localized: "To jest twoja jednostka \u0142ucznicza. Zostanie zbudowana kiedy
+      wybierzesz j\u0105 z menu sklepu i klikniesz w miejsce budowy."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 539789688832
+    m_Localized: "Kiedy klikniesz w jednostk\u0119, pojawi si\u0119 opcja ulepszenia
+      jednostki. Ulepszenia wzmacniaj\u0105 jednostk\u0119 za cen\u0119 z\u0142ota."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 760007426048
+    m_Localized: "Ka\u017Cda jednostka ma w\u0142asne, unikalne statystyki takie
+      jak obra\u017Cenia, zasi\u0119g, czy specjalne umiej\u0119tno\u015Bci, takie
+      jak zamra\u017Canie, kt\xF3re spowalnia przeciwnik\xF3w."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 991394594816
+    m_Localized: "To jest pasek narz\u0119dzi sklepu. Domy\u015Blnie jest ukryty,
+      ale mo\u017Cesz go rozwin\u0105\u0107, klikaj\u0105c przycisk \u201EMENU\u201D
+      znajduj\u0105cy si\u0119 w lewym dolnym rogu. Na g\xF3rze paska narz\u0119dzi
+      sklepu mo\u017Cesz zobaczy\u0107 swoje z\u0142oto, kt\xF3re jest u\u017Cywane
+      do kupowania jednostek. Pod z\u0142otem mo\u017Cesz zobaczy\u0107 jednostki
+      dost\u0119pne do kupienia."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

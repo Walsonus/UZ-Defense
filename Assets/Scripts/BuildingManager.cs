@@ -10,7 +10,7 @@ public class BuildingManager : MonoBehaviour
     // [SerializeField] private GameObject[] towerPrefabs;
     [SerializeField] private Tower[] towers;
 
-    public int coins = 100;
+    public int coins;
     private int selectedTower = 0;
 
     private void Awake(){
@@ -19,7 +19,7 @@ public class BuildingManager : MonoBehaviour
     
     //coins for start
     private void Start(){
-        
+        coins = Goldholder.gold;
     }
 
     //increasing coins method
