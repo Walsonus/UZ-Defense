@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Enemy
   - Bullet
-  - 
+  - Player
   - 
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 1
   - name: Bullets
     uniqueID: 4161107437
+    locked: 0
+  - name: Player
+    uniqueID: 3571126361
     locked: 0
   - name: UI
     uniqueID: 30787333
