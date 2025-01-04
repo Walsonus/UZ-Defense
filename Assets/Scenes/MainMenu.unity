@@ -2372,7 +2372,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 538646446}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 219633149}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &538646446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5101,9 +5113,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 1, g: 0.5058824, b: 0, a: 1}
-    topRight: {r: 1, g: 0.84313726, b: 0, a: 1}
+    topRight: {r: 1, g: 0.5058824, b: 0, a: 1}
     bottomLeft: {r: 1, g: 0.84313726, b: 0, a: 1}
-    bottomRight: {r: 1, g: 0.5058824, b: 0, a: 1}
+    bottomRight: {r: 1, g: 0.84313726, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -6234,8 +6246,8 @@ RectTransform:
   - {fileID: 513565111}
   - {fileID: 352079078}
   - {fileID: 538646444}
-  - {fileID: 295038983}
   - {fileID: 1547146921}
+  - {fileID: 295038983}
   - {fileID: 533366401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
