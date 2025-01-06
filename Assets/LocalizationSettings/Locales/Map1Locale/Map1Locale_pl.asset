@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: "wci\u015Bnij spacje, \u017Ceby przej\u015B\u0107 do kolejnego poziomu"
     m_Metadata:
       m_Items: []
+  - m_Id: 1460599900340224
+    m_Localized: MISJA NIEUDANA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     //speed at which the enemy moves by default
     private float baseSpeed;
 
+    
     private void Start()
     {
         baseSpeed = moveSpeed;
@@ -38,6 +39,8 @@ public class EnemyMovement : MonoBehaviour
             {
                 //if condition was reached - target'll be destroyed
                 Spawner.onEnemyDestroy.Invoke();
+                Spawner.baseHp--;
+                Debug.Log("Base HP decreased to " + Spawner.baseHp);
                 Destroy(gameObject);
                 return;
             }
@@ -66,5 +69,4 @@ public class EnemyMovement : MonoBehaviour
     public void ResetSpeed(){
         moveSpeed = baseSpeed;
     }
-
 }

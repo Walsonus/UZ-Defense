@@ -7,8 +7,10 @@ public class Spawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
-    [SerializeField] private AudioClip newMissionCompleteMusic;  // Nowy utwór na zakończenie misji
+    [SerializeField] AudioSource newMissionCompleteMusic;  // Nowy utwór na zakończenie misji
+    [SerializeField] AudioSource newMissionFailedMusic;  // Nowy utwór na niepowodzenie misji
     [SerializeField] AudioSource audioSource;  // Komponent AudioSource
+    
 
     [Header("Attributes")]
     [SerializeField] private int baseNumber = 10;
@@ -16,6 +18,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 15f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float enemiesPerSecondCap = 10f;
+    [SerializeField] private int initialBaseHp = 10;
+    public static int baseHp;
 
     [Header("Wave Control")]
     [SerializeField] private int totalWaves = 5; // liczba maksymalnych fal
@@ -32,9 +36,15 @@ public class Spawner : MonoBehaviour
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
     private float waveEnemiesPerSecond;
+    private bool defeat = false;
+    EnemyMovement enemyMovement;
+    public static bool failedPanel = false;
+    public static bool completePanel = false;
+
 
     private void Awake()
     {
+        baseHp = initialBaseHp;
         onEnemyDestroy.AddListener(EnemyDestroyed);
         audioSource.Play();
     }
@@ -42,6 +52,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartWave());
+        Debug.Log("Base HP:" + baseHp);
     }
 
     private void Update()
@@ -62,6 +73,15 @@ public class Spawner : MonoBehaviour
         {
             EndWave();
         }
+
+        if(baseHp <= 0)
+        {
+            baseHp++;
+            defeat = true;
+            MissionFailed();
+            StartCoroutine(WaitForKeyPress());
+        }
+        
     }
 
     private void EnemyDestroyed()
@@ -82,16 +102,17 @@ public class Spawner : MonoBehaviour
         isSpawning = false;
         timeSinceLastSpawn = 0f;
 
-        if (currentWave >= totalWaves)
-        {
-            MissionComplete();
-            StartCoroutine(WaitForKeyPress());
-        }
-        else
+        if(currentWave < totalWaves)
         {
             currentWave++;
             StartCoroutine(StartWave());
         }
+        if (currentWave >= totalWaves && !defeat)
+        {
+            MissionComplete();
+            StartCoroutine(WaitForKeyPress());
+        }
+        
     }
 
     void LoadMainMenu()
@@ -110,14 +131,9 @@ public class Spawner : MonoBehaviour
 
         if (audioSource != null && newMissionCompleteMusic != null)
     {
-        // Zatrzymanie obecnej muzyki przed zmianą
-        audioSource.Stop();  
-
         // Ustawienie nowego utworu
-        audioSource.clip = newMissionCompleteMusic;
-
-        // Odpalamy nową muzykę
-        audioSource.Play();  
+        audioSource.Stop();
+        audioSource.PlayOneShot(newMissionCompleteMusic.clip);
     }
         Debug.Log("Mission Complete!");
         foreach (Animator animator in animators){
@@ -126,6 +142,44 @@ public class Spawner : MonoBehaviour
         BlockUserInterface();
         DisableInteraction();
     }
+
+    private void MissionFailed()
+{
+    Debug.Log("MissionFailed called.");
+
+    if (audioSource == null)
+    {
+        Debug.LogError("AudioSource is not assigned!");
+        return;
+    }
+
+    if (newMissionFailedMusic == null)
+    {
+        Debug.LogError("newMissionFailedMusic is not assigned!");
+        return;
+    }
+    // Ustawienie nowego utworu
+    audioSource.Stop();
+    audioSource.PlayOneShot(newMissionFailedMusic.clip);
+
+    // Odpalamy nową muzykę
+    Debug.Log("Mission Failed music is playing.");
+
+    Debug.Log("Mission Failed!");
+    foreach (Animator animator in animators){
+        animator.SetTrigger("isMissionFailed");
+        Debug.Log("isMissionFailed triggered!");
+    }
+    BlockUserInterface();
+    DisableInteraction();
+    enemyMovement = FindObjectOfType<EnemyMovement>();
+    if (enemyMovement == null)
+    {
+        Debug.LogError("EnemyMovement component not found in the scene!");
+    }
+    enemyMovement.UpdateSpeed(0f);
+}
+
 
     private void SpawnEnemy()
     {
@@ -194,11 +248,12 @@ IEnumerator WaitForKeyPress()
     {
         LoadMainMenu();
     }
-    else if (Input.GetKeyDown(KeyCode.Space))
+    else
     {
         LoadMainMenu();
     }
 }
+
 
 
 

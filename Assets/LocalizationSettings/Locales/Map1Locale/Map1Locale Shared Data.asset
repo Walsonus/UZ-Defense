@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: Mission Completed 3
     m_Metadata:
       m_Items: []
+  - m_Id: 1460599900340224
+    m_Key: MISSION FAILED
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
