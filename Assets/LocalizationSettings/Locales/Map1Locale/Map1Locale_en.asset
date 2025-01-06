@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: press space to go to the next level
     m_Metadata:
       m_Items: []
+  - m_Id: 1460599900340224
+    m_Localized: MISSION FAILED
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
