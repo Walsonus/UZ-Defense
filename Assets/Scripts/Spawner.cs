@@ -2,6 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 
 public class Spawner : MonoBehaviour
 {
@@ -10,19 +14,22 @@ public class Spawner : MonoBehaviour
     [SerializeField] AudioSource newMissionCompleteMusic;  // Nowy utwór na zakończenie misji
     [SerializeField] AudioSource newMissionFailedMusic;  // Nowy utwór na niepowodzenie misji
     [SerializeField] AudioSource audioSource;  // Komponent AudioSource
+    [SerializeField] AudioSource defaultMusic;  // Domyślna muzyka
     
 
     [Header("Attributes")]
-    [SerializeField] private int baseNumber = 10;
+    [SerializeField] public static int baseNumber = 2;
     [SerializeField] private float enemiesPerSecond = 1f;
     [SerializeField] private float timeBetweenWaves = 15f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float enemiesPerSecondCap = 10f;
-    [SerializeField] private int initialBaseHp = 10;
+    
+    public static int currentLevel = 1;
+    private int initialBaseHp = Goldholder.health;
     public static int baseHp;
 
     [Header("Wave Control")]
-    [SerializeField] private int totalWaves = 5; // liczba maksymalnych fal
+    [SerializeField] public static int totalWaves = 1; // liczba maksymalnych fal
     [SerializeField] private CanvasGroup uiCanvasGroup;
     [SerializeField] private GameObject[] gameObjectsGroup;
 
@@ -107,7 +114,7 @@ public class Spawner : MonoBehaviour
             currentWave++;
             StartCoroutine(StartWave());
         }
-        if (currentWave >= totalWaves && !defeat)
+        else if (currentWave >= totalWaves && !defeat)
         {
             MissionComplete();
             StartCoroutine(WaitForKeyPress());
@@ -166,18 +173,28 @@ public class Spawner : MonoBehaviour
     Debug.Log("Mission Failed music is playing.");
 
     Debug.Log("Mission Failed!");
-    foreach (Animator animator in animators){
+    foreach (Animator animator in animators)
+
+    {
         animator.SetTrigger("isMissionFailed");
         Debug.Log("isMissionFailed triggered!");
     }
     BlockUserInterface();
     DisableInteraction();
-    enemyMovement = FindObjectOfType<EnemyMovement>();
-    if (enemyMovement == null)
+
+    EnemyMovement[] enemies = FindObjectsOfType<EnemyMovement>();
+    if (enemies == null || enemies.Length == 0)
     {
-        Debug.LogError("EnemyMovement component not found in the scene!");
+        Debug.LogError("No EnemyMovement components found in the scene!");
     }
-    enemyMovement.UpdateSpeed(0f);
+    else
+    {
+        foreach (EnemyMovement enemy in enemies)
+        {
+            enemy.UpdateSpeed(0f);
+            enemiesLeftToSpawn = 0;
+        }
+    }
 }
 
 
@@ -209,6 +226,46 @@ public class Spawner : MonoBehaviour
     else
     {
         Debug.LogError("CanvasGroup is not assigned in the inspector!");
+    }
+}
+
+    private void EnableInteraction()
+{
+    if (uiCanvasGroup != null)
+    {
+        uiCanvasGroup.interactable = true;
+        uiCanvasGroup.blocksRaycasts = true;
+        Debug.Log("UI interaction enabled.");
+    }
+    else
+    {
+        Debug.LogError("CanvasGroup is not assigned in the inspector!");
+    }
+
+    if (gameObjectsGroup != null)
+    {
+        // Iteruj przez wszystkie obiekty w grupie
+        foreach (GameObject obj in gameObjectsGroup)
+        {
+            if (obj != null)
+            {
+            
+                Collider2D collider = obj.GetComponent<Collider2D>();
+                if (collider != null)
+                {
+                    collider.enabled = true; // włączenie Collider2D
+                    Debug.Log("Collider enabled for object: " + obj.name);
+                }
+                else
+                {
+                    Debug.LogWarning("No Collider2D found on object: " + obj.name);
+                }
+            }
+        }
+    }
+    else
+    {
+        Debug.LogError("gameObjectsGroup is not assigned!");
     }
 }
     private void DisableInteraction()
@@ -244,17 +301,40 @@ IEnumerator WaitForKeyPress()
 {
     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space));
 
+    BuildingManager.main.SaveGame();
+
     if (Input.GetKeyDown(KeyCode.Escape))
     {
         LoadMainMenu();
     }
     else
     {
-        LoadMainMenu();
+        LoadNextWave();
+    }
+}
+
+private void LoadNextWave()
+    {
+        baseNumber += 2;
+        currentWave = 1;
+        totalWaves+=1;
+        baseHp = initialBaseHp;
+        currentLevel++;
+        Debug.Log("Next Wave Loaded with increased difficulty");
+        EnableInteraction();
+
+        if (audioSource != null && newMissionCompleteMusic != null)
+        {
+            audioSource.Stop();
+            audioSource.Play();
+        }
+        foreach (Animator animator in animators)
+        {
+            animator.ResetTrigger("isMissionCompleted");
+        }
+        StartCoroutine(StartWave());
     }
 }
 
 
 
-
-}

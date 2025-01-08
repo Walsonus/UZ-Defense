@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class Turret : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Turret : MonoBehaviour
     //reference to the upgrade UI
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private TextMeshProUGUI costText;
     
     [Header("Attribute")]
     //targetting range of the turret
@@ -54,7 +56,15 @@ public class Turret : MonoBehaviour
         baseRange = range;
 
         upgradeButton.onClick.AddListener(UpgradeTurret);
+
         
+        costText.text = CostCalculator().ToString();
+        
+        
+    }
+
+    void FixedUpdate(){
+        costText.text = CostCalculator().ToString();
     }
 
     // Update is called once per frame
@@ -84,7 +94,6 @@ public class Turret : MonoBehaviour
             }
             
         }
-
     }
 
     //returns true if the distance between the target and the turret is smaller or equal turret range
@@ -153,7 +162,7 @@ public class Turret : MonoBehaviour
     }
 
     private int CostCalculator(){
-        return (int)Math.Round((double)(baseCost*2 * (turretLevel/2)));
+        return (int)Math.Round((double)(baseCost*2 * ((double)turretLevel/2)));
     }
 
     private float RangeCalculator(){

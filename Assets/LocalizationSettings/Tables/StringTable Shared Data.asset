@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: UPGRADE
     m_Metadata:
       m_Items: []
+  - m_Id: 1892088394031104
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
