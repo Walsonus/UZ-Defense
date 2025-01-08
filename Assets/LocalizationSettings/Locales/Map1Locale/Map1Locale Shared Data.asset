@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: MISSION FAILED
     m_Metadata:
       m_Items: []
+  - m_Id: 1889980609470464
+    m_Key: currentlevel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
