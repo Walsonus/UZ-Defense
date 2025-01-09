@@ -37,10 +37,10 @@ public class Turret : MonoBehaviour
     
 
     //test function showing the range of the turret
-        private void OnDrawGizmosSelected(){
-            Handles.color = Color.blue;
-            Handles.DrawWireDisc(transform.position, transform.forward, range);
-        }
+        // private void OnDrawGizmosSelected(){
+        //     Handles.color = Color.blue;
+        //     Handles.DrawWireDisc(transform.position, transform.forward, range);
+        // }
 
     //position of the turret target
     private Transform target;
